@@ -5,23 +5,23 @@ import starlight from '@astrojs/starlight';
 export default defineConfig({
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'PwnMemo',
 			social: {
 				github: 'https://github.com/withastro/starlight',
 			},
 			sidebar: [
 				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', link: '/guides/example/' },
-					],
+					label: 'Welcome',
+					autogenerate: { directory: 'pwnmemo/welcome' },
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: 'Web',
+					autogenerate: { directory: 'pwnmemo/web' },
 				},
 			],
+			components: {
+				PageFrame: './src/components/PageFrameOverride.astro',
+			}
 		}),
 	],
 });

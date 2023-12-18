@@ -1,0 +1,25 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+
+const blogPosts = await getCollection('docs', ({slug}) => {
+    return slug.split('/')[0] === 'blog';
+});
+---
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>blog.astro</h1>
+
+        <ul>
+            {blogPosts.map(blogPost => (
+                <li><a href={blogPost.slug}>{blogPost.slug}</a></li>
+            ))}
+        </ul>
+    </body>
+</html>
