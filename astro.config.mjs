@@ -7,7 +7,8 @@ export default defineConfig({
 		starlight({
 			title: 'heschl.dev',
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/jonasheschl',
+				mastodon: 'https://mastodon.de/@jones',
 			},
 			sidebar: [
 				{
