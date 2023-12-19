@@ -19,6 +19,10 @@ export default defineConfig({
 					label: 'Web',
 					autogenerate: { directory: 'pwnmemo/web' },
 				},
+				{
+					label: 'CTF Writeups',
+					autogenerate: { directory: 'pwnmemo/ctf-writeups' },
+				},
 			],
 			components: {
 				PageFrame: './src/components/PageFrameOverride.astro',
@@ -31,4 +35,8 @@ export default defineConfig({
 			]
 		}),
 	],
+	redirects: {
+		'/pwnmemo': '/pwnmemo/welcome/welcome',
+		'/pwnmemo/welcome': '/pwnmemo/welcome/welcome',
+	},
 });
