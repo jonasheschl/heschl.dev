@@ -25,6 +25,7 @@ export default defineConfig({
 			customCss: [
 				'@fontsource/merriweather-sans/400.css',
 				'@fontsource/merriweather-sans/600.css',
+				'@fontsource/jetbrains-mono/400.css',
 				'./src/styles/global.css',
 			]
 		}),
