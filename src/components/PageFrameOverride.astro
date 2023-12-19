@@ -41,6 +41,20 @@ const isBlogPost = Astro.url.pathname.split('/')[1] === "blog";
 	main .sl-container {
 		margin: auto;
 	}
+
+	.main-frame > div {
+		justify-content: center !important;
+	}
+
+	.main-pane {
+		width: 100% !important;
+	}
+
+	@media (min-width: 72rem) {
+		.sl-container {
+			margin-right: 5rem !important;
+		}
+	}
 </style>
 }
 
