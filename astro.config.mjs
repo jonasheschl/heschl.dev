@@ -21,7 +21,14 @@ export default defineConfig({
 				},
 				{
 					label: 'CTF Writeups',
-					autogenerate: { directory: 'pwnmemo/ctf-writeups' },
+					collapsed: true,
+					items: [
+						{
+							label: 'Google CTF 2023 — Under-Construction',
+							link: '/blog/2023-06-26-google-ctf-2023-under-construction-writeup',
+							attrs: { target: '_blank', style: 'font-style: italic' },
+						},
+					],
 				},
 			],
 			components: {
