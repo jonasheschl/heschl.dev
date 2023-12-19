@@ -21,7 +21,12 @@ export default defineConfig({
 			],
 			components: {
 				PageFrame: './src/components/PageFrameOverride.astro',
-			}
+			},
+			customCss: [
+				'@fontsource/merriweather-sans/400.css',
+				'@fontsource/merriweather-sans/600.css',
+				'./src/styles/global.css',
+			]
 		}),
 	],
 });
