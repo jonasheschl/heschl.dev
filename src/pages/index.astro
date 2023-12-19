@@ -1,19 +1,11 @@
 ---
-
+import Layout from "../components/Layout.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Document</title>
-	</head>
-	<body>
-		<h1>index.astro</h1>
-		<ul>
-			<li>Blog Posts <a href="blog">here</a></li>
-			<li>Pwnmemo <a href="pwnmemo/welcome/welcome">here</a></li>
-		</ul>
-	</body>
-</html>
+<Layout>
+	<h1>index.astro</h1>
+	<ul>
+		<li>Blog Posts <a href="blog">here</a></li>
+		<li>Pwnmemo <a href="pwnmemo/welcome/welcome">here</a></li>
+	</ul>
+</Layout>
