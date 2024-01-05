@@ -2,14 +2,14 @@
 import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.astro';
 import type { Props } from '@astrojs/starlight/props';
 
-const { hasSidebar, labels } = Astro.props;
+const { labels } = Astro.props;
 const isBlogPost = Astro.url.pathname.split('/')[1] === "blog";
 ---
 
 <div class="page sl-flex">
 	<header class="header"><slot name="header" /></header>
 	{
-		(hasSidebar && !isBlogPost) && (
+		!isBlogPost && (
 			<nav class="sidebar" aria-label={labels['sidebarNav.accessibleLabel']}>
 				<MobileMenuToggle {...Astro.props} />
 				<div id="starlight__sidebar" class="sidebar-pane">
@@ -23,7 +23,7 @@ const isBlogPost = Astro.url.pathname.split('/')[1] === "blog";
 	<div class="main-frame"><slot /></div>
 </div>
 
-{ !(hasSidebar && !isBlogPost) &&
+{ isBlogPost &&
 <style is:global>
 	/* These styles are only applied to pages in the /blog/ subdirectory. */
 	

@@ -10,8 +10,15 @@ const isBlogPost = Astro.url.pathname.split('/')[1] === "blog";
 
 if (isBlogPost) {
     next = undefined;
-    prev.label = "All Blog Posts";
-    prev.href = "/blog";
+	prev = {
+		type: 'link',
+		label: 'All Blog Posts',
+		href: '/blog',
+		isCurrent: true,
+		badge: undefined,
+		// @ts-ingore-error
+		attrs: undefined,
+	}
 }
 
 if (!isBlogPost && next?.href.startsWith("/blog/")) {
