@@ -9,6 +9,8 @@ import FigCaption from '../../../components/FigCaption.astro';
 
 Using Docker in Gitlab CI/CD exposes some issues and performance problems. In this article, we will discuss how to deal with them.
 
+***
+
 ## Executors and Docker
 
 The executor defines how commands within the `.gitlab-ci.yaml` `scripts` section are executed for each Gitlab CI/CD runner. In this case, we’ll be using the Docker executor, which starts a new Docker container for each CI/CD stage and executes the `script` within the container. The base image for the Docker container can be specified to suit our needs, such as `docker:latest`.
