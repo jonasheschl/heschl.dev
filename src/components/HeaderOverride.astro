@@ -1,0 +1,16 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Header.astro';
+
+const isPwnMemo = Astro.url.pathname.split('/')[1] === "pwnmemo";
+---
+
+{
+    isPwnMemo ? (
+        <Default {...Astro.props}>
+            <slot/>
+        </Default>
+    ) : (
+        <nav>custom nav</nav>
+    )
+}

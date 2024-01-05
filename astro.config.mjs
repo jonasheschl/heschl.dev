@@ -34,6 +34,7 @@ export default defineConfig({
 			components: {
 				PageFrame: './src/components/PageFrameOverride.astro',
 				Pagination: './src/components/PaginationOverride.astro',
+				Header: './src/components/HeaderOverride.astro',
 			},
 			customCss: [
 				'@fontsource/merriweather-sans/400.css',
