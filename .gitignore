@@ -19,3 +19,7 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# Ignore WIP articles
+src/content/docs/blog/*uncertain*
+src/assets/blog-posts/*uncertain*/**
