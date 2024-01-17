@@ -1,11 +1,15 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'heschl.dev',
+			expressiveCode: {
+				plugins: [pluginCollapsibleSections()],
+			},
 			social: {
 				github: 'https://github.com/jonasheschl',
 				mastodon: 'https://mastodon.de/@jones',
