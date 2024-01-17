@@ -11,6 +11,10 @@ const isPwnMemo = Astro.url.pathname.split('/')[1] === "pwnmemo";
             <slot/>
         </Default>
     ) : (
-        <nav>custom nav</nav>
+        <nav>
+            <a href="/">heschl.dev</a>
+            <a href="/blog" style="margin: 10px">Blog</a>
+            <a href="/pwnmemo">PwnMemo</a>
+        </nav>
     )
 }

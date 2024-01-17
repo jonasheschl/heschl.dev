@@ -3,8 +3,13 @@ import MobileMenuToggle from '@astrojs/starlight/components/MobileMenuToggle.ast
 import type { Props } from '@astrojs/starlight/props';
 
 const { labels } = Astro.props;
-const isBlogPost = Astro.url.pathname.split('/')[1] === "blog";
-const isPwnMemo = Astro.url.pathname.split('/')[1] === "pwnmemo";
+
+const pathSections = Astro.url.pathname.split('/');
+
+// Apply blog styles only to blog posts, not the blog index
+const isBlogPost = pathSections[1] === "blog" && pathSections[2] != null;
+// Display the left sidebar only on pwnmemo articles
+const isPwnMemo = pathSections[1] === "pwnmemo";
 ---
 
 <div class="page sl-flex">
