@@ -1,15 +1,13 @@
 ---
 interface Props {
     title: string;
-    description: string;
     href: string;
     image: object;
-    imageAlt: string;
     releaseDate: object;
     tags: Array<string>;
 }
 
-const { title, description, href, image, imageAlt, releaseDate, tags } = Astro.props;
+const { title, href, image, releaseDate, tags } = Astro.props;
 ---
 
 <a href={href}>

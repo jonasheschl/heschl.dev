@@ -1,4 +1,4 @@
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 
 const blogPostsReversed = await getCollection('docs', ({slug}) => {
     const pathSections = slug.split('/');
