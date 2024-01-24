@@ -22,18 +22,22 @@ hero:
       link: /pwnmemo/welcome/welcome
 ---
 
-import { CardGrid, Card } from '@astrojs/starlight/components';
+import BlogCard from '../../components/BlogCard.astro';
 import About from '../../components/About.astro';
+import { blogPosts } from "../../components/blogPosts.js";
 
 ## Featured articles
-
-<Card title="Google CTF 2023 — Under-Construction Writeup">
-  After dabbling in cyber security for some years, I decided to attempt this years Google CTF with a friend. My personal goal was to get at least one flag, which we achieved — Under-Construction.
-</Card>
-
-<Card title="Gitlab CI/CD Docker and Performance">
-  Using Docker in Gitlab CI/CD exposes some issues and performance problems. In this article, we will discuss how to deal with them.
-</Card>
+<br/>
+{blogPosts.slice(0, 2).map(post => (
+    <BlogCard
+        title={post.data.title}
+        href={post.slug}
+        image={post.data.image}
+        releaseDate={post.data.lastUpdated}
+        tags={post.data.tags}>
+        {post.data.description}
+    </BlogCard>
+))}
 
 <About title="About heschl.dev">
   heschl.dev is the personal website of Jonas Heschl.
