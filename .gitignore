@@ -20,6 +20,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# Ignore env.d.ts since it is automatically edited by editors
+src/env.d.ts
+
 # Ignore WIP articles
 src/content/docs/blog/*uncertain*
 src/assets/blog-posts/*uncertain*/**
