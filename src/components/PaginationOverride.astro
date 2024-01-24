@@ -1,6 +1,5 @@
 ---
 import { Icon } from "@astrojs/starlight/components";
-import type { Props } from "@astrojs/starlight/props";
 
 const { dir, labels, pagination } = Astro.props;
 let { prev, next } = pagination;
@@ -17,8 +16,7 @@ if (isBlogPost) {
     href: "/blog",
     isCurrent: true,
     badge: undefined,
-    // @ts-ingore-error
-    attrs: undefined,
+    attrs: null,
   };
 }
 

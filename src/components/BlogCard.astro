@@ -2,8 +2,8 @@
 interface Props {
   title: string;
   href: string;
-  image: object;
-  releaseDate: object;
+  image: { src: string; alt: string };
+  releaseDate: Date;
   tags: Array<string>;
 }
 
