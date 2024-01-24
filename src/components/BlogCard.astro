@@ -1,71 +1,69 @@
 ---
 interface Props {
-    title: string;
-    href: string;
-    image: object;
-    releaseDate: object;
-    tags: Array<string>;
+  title: string;
+  href: string;
+  image: object;
+  releaseDate: object;
+  tags: Array<string>;
 }
 
 const { title, href, image, releaseDate, tags } = Astro.props;
 ---
 
 <a href={href}>
-    <article class="card-container">
-        <div class="text-container">
-            <span class="date">{releaseDate?.toLocaleDateString()}</span>
-            <h3 class="title">{title}</h3>
-            <p class="description"><slot/></p>
-            <p class="tags">
-                {tags?.map(tag => (
-                    <span>#{tag}</span>
-                ))}
-            </p>
-        </div>
+  <article class="card-container">
+    <div class="text-container">
+      <span class="date">{releaseDate?.toLocaleDateString()}</span>
+      <h3 class="title">{title}</h3>
+      <p class="description"><slot /></p>
+      <p class="tags">
+        {tags?.map((tag) => <span>#{tag}</span>)}
+      </p>
+    </div>
 
-        <img src={image?.src} alt={image?.alt} />
-    </article>
+    <img src={image?.src} alt={image?.alt} />
+  </article>
 </a>
 
 <style>
-    a {
-        display: block;
-        text-decoration: none;
-        margin-left: 1rem;
-    }
+  a {
+    display: block;
+    text-decoration: none;
+    margin-left: 1rem;
+  }
 
-    .title {
-        margin-top: 1rem !important;
-    }
+  .title {
+    margin-top: 1rem !important;
+  }
 
-    .card-container {
-        display: flex;
-        flex-direction: row;
-        border-bottom: 1px solid var(--sl-color-hairline);
-    }
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid var(--sl-color-hairline);
+  }
 
-    .text-container {
-        width: 40vw;
-    }
+  .text-container {
+    width: 40vw;
+  }
 
-    img {
-        width: 115px;
-        height: 115px;
-        object-fit: contain;
-        align-self: center;
-        margin-top: 0 !important;
-    }
+  img {
+    width: 115px;
+    height: 115px;
+    object-fit: contain;
+    align-self: center;
+    margin-top: 0 !important;
+  }
 
-    a {
-        margin-bottom: 2rem;
-    }
+  a {
+    margin-bottom: 2rem;
+  }
 
-    .tags > span {
-        margin-right: 1rem;
-        color: var(--sl-color-gray-3);
-    }
+  .tags > span {
+    margin-right: 1rem;
+    color: var(--sl-color-gray-3);
+  }
 
-    .tags {
-        margin-bottom: 1rem;
-    }
+  .tags {
+    margin-bottom: 1rem;
+  }
 </style>

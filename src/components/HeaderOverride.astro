@@ -1,20 +1,22 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/components/Header.astro';
+import type { Props } from "@astrojs/starlight/props";
+import Default from "@astrojs/starlight/components/Header.astro";
 
-const isPwnMemo = Astro.url.pathname.split('/')[1] === "pwnmemo";
+const isPwnMemo = Astro.url.pathname.split("/")[1] === "pwnmemo";
 ---
 
 {
-    isPwnMemo ? (
-        <Default {...Astro.props}>
-            <slot/>
-        </Default>
-    ) : (
-        <nav>
-            <a href="/">heschl.dev</a>
-            <a href="/blog" style="margin: 10px">Blog</a>
-            <a href="/pwnmemo">PwnMemo</a>
-        </nav>
-    )
+  isPwnMemo ? (
+    <Default {...Astro.props}>
+      <slot />
+    </Default>
+  ) : (
+    <nav>
+      <a href="/">heschl.dev</a>
+      <a href="/blog" style="margin: 10px">
+        Blog
+      </a>
+      <a href="/pwnmemo">PwnMemo</a>
+    </nav>
+  )
 }

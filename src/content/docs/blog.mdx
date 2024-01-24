@@ -2,16 +2,19 @@
 title: Blog Posts
 template: splash
 ---
-import BlogCard from '../../components/BlogCard.astro';
+
+import BlogCard from "../../components/BlogCard.astro";
 import { blogPosts } from "../../components/blogPosts.js";
 
-{blogPosts
-    .map(post =>
-        <BlogCard
-            title={post.data.title}
-            href={post.slug}
-            image={post.data.image}
-            releaseDate={post.data.lastUpdated}
-            tags={post.data.tags}>
-            {post.data.description}
-        </BlogCard>)}
+{blogPosts.map(post =>
+
+<BlogCard
+  title={post.data.title}
+  href={post.slug}
+  image={post.data.image}
+  releaseDate={post.data.lastUpdated}
+  tags={post.data.tags}
+>
+  {post.data.description}
+</BlogCard>
+)}

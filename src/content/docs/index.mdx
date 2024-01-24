@@ -22,27 +22,31 @@ hero:
       link: /pwnmemo/welcome/welcome
 ---
 
-import BlogCard from '../../components/BlogCard.astro';
-import About from '../../components/About.astro';
+import BlogCard from "../../components/BlogCard.astro";
+import About from "../../components/About.astro";
 import { blogPosts } from "../../components/blogPosts.js";
 
 ## Featured articles
-<br/>
-{blogPosts.slice(0, 2).map(post => (
-    <BlogCard
-        title={post.data.title}
-        href={post.slug}
-        image={post.data.image}
-        releaseDate={post.data.lastUpdated}
-        tags={post.data.tags}>
-        {post.data.description}
-    </BlogCard>
+
+<br />
+{blogPosts.slice(0, 2).map((post) => (
+  <BlogCard
+    title={post.data.title}
+    href={post.slug}
+    image={post.data.image}
+    releaseDate={post.data.lastUpdated}
+    tags={post.data.tags}
+  >
+    {post.data.description}
+  </BlogCard>
 ))}
 
 <About title="About heschl.dev">
-  heschl.dev is the personal website of Jonas Heschl.
-  The site is run by <a href="https://passgenau.digital/en" target="_blank">passgenau-digital GmbH</a>.
-  See the
+  heschl.dev is the personal website of Jonas Heschl. The site is run by{" "}
+  <a href="https://passgenau.digital/en" target="_blank">
+    passgenau-digital GmbH
+  </a>
+  . See the
   <a href="">imprint</a>
   and
   <a href="">privacy policy</a>.
