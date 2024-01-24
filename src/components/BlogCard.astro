@@ -15,17 +15,17 @@ const { title, description, href, image, imageAlt, releaseDate, tags } = Astro.p
 <a href={href}>
     <article class="card-container">
         <div class="text-container">
-            <span class="date">{releaseDate.toLocaleDateString()}</span>
+            <span class="date">{releaseDate?.toLocaleDateString()}</span>
             <h3 class="title">{title}</h3>
             <p class="description"><slot/></p>
             <p class="tags">
-                {tags.map(tag => (
+                {tags?.map(tag => (
                     <span>#{tag}</span>
                 ))}
             </p>
         </div>
 
-        <img src={image.src} alt={image.alt} />
+        <img src={image?.src} alt={image?.alt} />
     </article>
 </a>
 
