@@ -10,6 +10,7 @@
     "astro": "astro",
     "lint:eslint": "eslint .",
     "format:code": "prettier . -w --plugin-search-dir=.",
+    "format-lint": "npm run format:code && npm run lint:eslint",
     "prepare": "husky install",
     "husky": "husky"
   },
