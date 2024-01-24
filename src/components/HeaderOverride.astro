@@ -20,6 +20,15 @@ const shouldRenderSearch = config.pagefind && isPwnMemo;
   </div>
   <div class="sl-flex">
     {shouldRenderSearch && <Search {...Astro.props} />}
+    {
+      !isPwnMemo && (
+        <nav id="main-nav">
+          <a href="/">Home</a>
+          <a href="/blog">Blog</a>
+          <a href="/pwnmemo/welcome/welcome">PwnMemo</a>
+        </nav>
+      )
+    }
   </div>
   <div class="sl-hidden md:sl-flex right-group">
     <div class="sl-flex social-icons">
@@ -36,6 +45,19 @@ const shouldRenderSearch = config.pagefind && isPwnMemo;
     justify-content: space-between;
     align-items: center;
     height: 100%;
+  }
+
+  #main-nav > a {
+    color: var(--sl-color-white);
+    text-decoration: none;
+    margin-right: 1rem;
+    font-weight: bold;
+    font-size: large;
+    font-family: "Merriweather Sans", serif;
+  }
+
+  #main-nav > a:hover {
+    text-decoration: underline;
   }
 
   .right-group,
