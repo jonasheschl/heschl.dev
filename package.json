@@ -38,6 +38,6 @@
   },
   "lint-staged": {
     "*.{css,ts,js,astro,mjs,cjs}": "eslint",
-    "*.{json,css,ts,js,md,mdx,astro,mjs,cjs}": "prettier --write"
+    "*.{json,css,ts,js,astro,mjs,cjs}": "prettier --check"
   }
 }
