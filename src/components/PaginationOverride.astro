@@ -6,7 +6,7 @@ let { prev, next } = pagination;
 const isRtl = dir === "rtl";
 
 const pathSections = Astro.url.pathname.split("/");
-const isBlogPost = pathSections[0] === "blog" && pathSections[1] != null;
+const isBlogPost = pathSections[1] === "blog" && pathSections[2] != null;
 
 if (isBlogPost) {
   next = undefined;
