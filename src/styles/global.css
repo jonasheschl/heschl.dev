@@ -5,7 +5,7 @@
 
 /* Grayscale the hero image on the index page */
 .hero > img {
-  filter: grayscale(80%);
+  filter: grayscale(90%);
 }
 
 /* Dark mode colors. */
