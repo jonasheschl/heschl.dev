@@ -7,7 +7,9 @@ const { labels } = Astro.props;
 const pathSections = Astro.url.pathname.split('/');
 
 // Apply blog styles only to blog posts, not the blog index
-const isBlogPost = pathSections[1] === "blog" && pathSections[2] != null;
+const isBlogPost = pathSections[1] === "blog" &&
+	pathSections[2] != null &&
+	pathSections[2] !== "";
 // Display the left sidebar only on pwnmemo articles
 const isPwnMemo = pathSections[1] === "pwnmemo";
 ---
