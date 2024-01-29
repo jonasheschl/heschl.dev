@@ -1,8 +1,11 @@
 ---
+import { Image } from "astro:assets";
+import ImageMetadata from "astro";
+
 interface Props {
   title: string;
   href: string;
-  image: { src: string; alt: string };
+  image: { src: ImageMetadata; alt: string };
   releaseDate: Date;
   tags: Array<string>;
 }
@@ -21,7 +24,7 @@ const { title, href, image, releaseDate, tags } = Astro.props;
       </p>
     </div>
 
-    <img src={image?.src} alt={image?.alt} />
+    <Image src={image?.src} alt={image?.alt} />
   </article>
 </a>
 
