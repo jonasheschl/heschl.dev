@@ -1,19 +1,19 @@
 # heschl.dev
 
 This repository contains the source code for my website heschl.dev which includes a
-blog as well as a hack-tricks-esque reference named pwnmemo.
+blog as well as a notes on cybersecurity and hacking.
 
-## Blog post ideas
+## Running this project
 
-1. How to set up screencapture with python using OBS. Exisiting articles periodcaly
-   take screenshots, wich is of course less than optimal and not a possibility for many
-   use cases.
-2. Adding expressive code plugins to starlight.
+To run this project, first install its dependencies using `npm install` and set up
+the git hooks using `npm run prepare`. Once this is done, you can either start a
+development server by running `npm run dev` or view a preview by running the commands
+`npm run build` and `npm run preview` after each other.
 
-## Pwnmemo article ideas
+## Development
 
-1. Reference cheatsheets for ffuf, nmap and possible others.
-1. For ffuf also mention integration with burp suite as per https://becomingahacker.org/a-quick-guide-to-using-ffuf-with-burp-suite-713492f62242
-1. Content sniffing and how to exploit it
-1. Bypassing PHP image verifications when only image type and length are checked
-   using scuffed C-code image format (GlacierCTF web challenge).
+If you want to make changes to this project, note that this project enforces eslint
+and prettier code standards. Using a precommit git hook, staged changes are checked
+by eslint and prettier before each commit automatically. You can manually check for
+adherence and/or automatically format your code in accordance to the standards by
+running `npm run lint:eslint` and `npm run format:code`.
