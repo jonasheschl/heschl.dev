@@ -1,17 +1,14 @@
 ---
 import type { Props } from "@astrojs/starlight/props";
-import config from "virtual:starlight/user-config";
-import {
-  LanguageSelect,
-  Search,
-  SiteTitle,
-  SocialIcons,
-  ThemeSelect,
-} from "virtual:starlight/components";
+import LanguageSelect from "@astrojs/starlight/components/LanguageSelect.astro";
+import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
+import SocialIcons from "@astrojs/starlight/components/SocialIcons.astro";
+import Search from "@astrojs/starlight/components/Search.astro";
+import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
 
 const isPwnMemo = Astro.url.pathname.split("/")[1] === "pwnmemo";
 
-const shouldRenderSearch = config.pagefind && isPwnMemo;
+const shouldRenderSearch = isPwnMemo;
 ---
 
 <div class="header sl-flex">
