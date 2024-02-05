@@ -12,7 +12,7 @@ import { blogPosts } from "../../components/blogPosts.js";
 
 <BlogCard
   title={post.data.title}
-  href={post.slug}
+  href={"/" + post.slug}
   image={post.data.image}
   releaseDate={post.data.lastUpdated}
   tags={post.data.tags}
