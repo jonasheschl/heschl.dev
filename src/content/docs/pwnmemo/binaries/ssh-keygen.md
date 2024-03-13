@@ -5,7 +5,8 @@ description: A reference on features of the ssh-keygen binary, relevant for secu
 
 ## Code execution/Privilege escalation
 
-The binary `ssh-keygen` can be made to load custom libraries via the `-D` switch.
+The binary `ssh-keygen` can be made to load custom libraries via the `-D` switch. This can result in arbitrary code
+execution. If `ssh-keygen` has SUID set, this can also lead to privilege escalation.
 
 ```bash
 ssh-keygen -D /path/to/custom/library.so
