@@ -26,6 +26,6 @@ This codebase also preserves the effective user id. Useful if `openssl` is run w
 
 ## References
 
-1. [ssh-keygen man page](https://www.man7.org/linux/man-pages/man1/ssh-keygen.1.html)
+1. [openssl man page](https://linux.die.net/man/1/openssl)
 2. [Blog post by Sean Pesce](https://seanpesce.blogspot.com/2023/03/leveraging-ssh-keygen-for-arbitrary.html)
 3. [Modified lib2shell codebase for exploiting the ssh-keygen behaviour](https://github.com/jonasheschl/lib2shell-ssh-keygen)
