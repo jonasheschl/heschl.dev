@@ -12,7 +12,7 @@ execution. If `ssh-keygen` has SUID set, this can also lead to privilege escalat
 ssh-keygen -D /path/to/custom/library.so
 ```
 
-The easiest way to write a library in such a way that its code is executed by ssh-keygen is to add a library constructor
+The easiest way to write a library in such a way that its code is executed by `ssh-keygen` is to add a library constructor
 `__attribute__((constructor))`.
 
 ```c
@@ -31,7 +31,7 @@ int C_GetFunctionList() {
 ```
 
 A ready-made codebase for getting code execution is available [here](https://github.com/jonasheschl/lib2shell-ssh-keygen).
-This codebase also preserves the effective user id. Useful if ssh-keygen is run with SUID for example.
+This codebase also preserves the effective user id. Useful if `ssh-keygen` is run with SUID for example.
 
 ## References
 
