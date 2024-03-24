@@ -1,0 +1,53 @@
+---
+title: openECSC 2024 – Life Quiz CTF Writeup
+description: Life Quiz was a web challenge in round 1 of 2024's openECSC
+pagefind: false
+image:
+  src: /src/assets/blog-posts/2024-03-24-openecsc-2024-life-quiz-ctf-writeup/01_quizzing.png
+  alt: A screenshot of the quizzing section of this challenge. "Question 1. What is the meaning of life? 42, There is no meaning, To be happy, To help others."
+tags: ["PHP", "Race Conditions", "Command Injection"]
+---
+
+import FigCaption from "../../../components/FigCaption.astro";
+
+Life Quiz was a web challenge in round 1 of 2024's openECSC. To solve this challenge, it was necessary to exploit
+a race conditions as well as a command injection was.
+
+---
+
+This CTF challenge was white-box. E.g. the source was given. In addition to the source code, we also get a URL pointing
+us to the live server.
+
+![openECSC 2024 platform screenshot of the challenge. "Try out our quiz to win a incredible prize! Site: http://lifequiz.challs.open.ecsc2024.it"](../../../assets/blog-posts/2024-03-24-openecsc-2024-life-quiz-ctf-writeup/02_platform.png)
+
+<FigCaption caption="Life Quiz challenge description." />
+
+## Getting an overview
+
+Looking through the hosted web application, we get an overview of what Life Quiz is about. After registering an account
+and logging in, we have three options:
+
+1. Answer quiz questions. When we answer correctly, we get a point. After each attempt, we get a new question.
+2. Request a prize. However, when we do that we are informed that we must first play the game.
+3. Reset points. This resets our points and our current question.
+
+![Login and register forms. Register requires username and email, while login requires email and password.](../../../assets/blog-posts/2024-03-24-openecsc-2024-life-quiz-ctf-writeup/03_login.png)
+
+<FigCaption caption="login.php – To perform actions on Life Quiz, we must first register and log in to an account." />
+
+![A screenshot of the quizzing section of this challenge. "Question 1. What is the meaning of life? 42, There is no meaning, To be happy, To help others."](../../../assets/blog-posts/2024-03-24-openecsc-2024-life-quiz-ctf-writeup/01_quizzing.png)
+
+<FigCaption caption="quiz.php – On the quizzing page, we can answer questions with one of four options." />
+
+![White website with writing: "No prize for you, play our game to win!"](../../../assets/blog-posts/2024-03-24-openecsc-2024-life-quiz-ctf-writeup/04_prize.png)
+
+<FigCaption caption="prize.php – No prize for us ): To get a prize, we have to answer questions!" />
+
+![White website with writing: "Your progress has been reset! Start the quiz"](../../../assets/blog-posts/2024-03-24-openecsc-2024-life-quiz-ctf-writeup/05_reset.png)
+
+<FigCaption caption="reset.php – Resets the current question to the first one and our points to 0." />
+
+## Looking through the code
+
+Now that we roughly know what this website is about, lets look through the code to find out what we really need to do
+to get the flag!
