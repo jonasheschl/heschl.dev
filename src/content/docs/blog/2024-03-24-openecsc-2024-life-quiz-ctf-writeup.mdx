@@ -91,8 +91,8 @@ RUN convert -draw 'text 0,1219 "flag{test_flag}"' -pointsize 60 -gravity Center 
 ```
 
 As we can see in the highlighted line, during the container build, the flag will be inserted as a text string into
-an image `/prizes/flag.jpg`. While `/prizes/flag.jpg` is never as is in the code, there is one file that comes pretty
-close. Namely `get_prize.php`.
+an image `/prizes/flag.jpg`. While the path `/prizes/flag.jpg` is never used as is in the code, there is one file that
+comes pretty close. Namely `get_prize.php`.
 
 ```php collapse={1-29, 54-54} {38} title="get_prize.php"
 <?php
