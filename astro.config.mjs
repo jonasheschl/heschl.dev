@@ -36,6 +36,11 @@ export default defineConfig({
               link: "/blog/2023-06-26-google-ctf-2023-under-construction-writeup",
               attrs: { target: "_blank", style: "font-style: italic" },
             },
+            {
+              label: "openECSC 2024 – Life Quiz CTF Writeup",
+              link: "/blog/2024-03-24-openecsc-2024-life-quiz-ctf-writeup",
+              attrs: { target: "_blank", style: "font-style: italic" },
+            },
           ],
         },
       ],
