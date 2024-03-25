@@ -25,9 +25,8 @@ us to the live server.
 <FigCaption caption="Life Quiz challenge description." />
 
 ## Getting an overview
-
-Looking through the hosted web application, we get an overview of what Life Quiz is about. After registering an account
-and logging in, we have three options:
+Upon reviewing the hosted web application, we gain an understanding of what Life Quiz is about. After registering an
+account and logging in, we are presented with three options:
 
 1. Answer quiz questions. When we answer correctly, we get a point. After each attempt, we get a new question.
 2. Request a prize. However, when we do that we are informed that we must first play the game.
@@ -51,7 +50,7 @@ and logging in, we have three options:
 
 ## Looking through the code
 
-Now that we roughly know what this website is about, lets look through the code to find out what we really need to do
+Now that we roughly know what this website is about, let's look through the code to find out what we really need to do
 to get the flag! If you want to have a look for yourself, download the challenge source
 [here](/2024-03-24-openecsc-2024-life-quiz-ctf-writeup/lifequiz.zip).
 
@@ -152,8 +151,8 @@ $conn->close();
 ```
 
 Looking through the `convert` documentation, if we could get this code path to execute, we could inject a graphic
-primitive (more on that later) to load the flag image into our personal image and retrieve the flag that way. What's
-stopping us here is getting 15 points.
+primitive (more on that later) to load the flag image into our personal image and retrieve the flag that way. The hurdle
+here is acquiring 15 points.
 
 The only code path in the code base incrementing our points counter is located in `quiz.php`.
 
@@ -284,7 +283,7 @@ Summing up, the first obstacle is to get a user with 15 points. After that, we c
 ## Getting 15 points
 
 Let's revisit `quiz.php`! Our chances of guessing correctly 15 times in a row are `0.25 ^ 15 -> 0.000000001`. So
-guessing the questions until we get lucky 15 times in a row is not feasible.  We'll have to find another way then.
+guessing the questions until we get lucky 15 times in a row is not feasible.  We'll need to find an alternative approach.
 One thing that strikes us is that none of the SQL statements use transactions. Furthermore, the statement updating a
 users points is executed *after* that users `question_id` is incremented. We might be able to exploit this fact as a
 race condition by answering each question multiple times at the same time.
@@ -592,7 +591,7 @@ $conn->close();
 The command in this code path runs the utility convert (used for editing images of various formats) to add the name of
 the winning user to their personal trophy. Out of the box the command does not give the user the challenges flag!
 Since the username is escaped using `escapeshellargs()`, we can't easily exfiltrate `/prizes/flag.png` via netcat.
-We might be able to inject additional arguments into `convert` however. Indeed, the documentation for `convert -draw`
+However, we might be able to inject additional arguments into `convert`. Indeed, the documentation for `convert -draw`
 states that one of the allowed image primitives - besides `text`, `circle` and more - is `image`.
 
 ```raw title="man convert" {20}
@@ -632,11 +631,11 @@ description of the composite operators.
 ```
 
 As per the documentation, we could create a user named something like "image Over 500,500 1000,1000 /prizes/flag.png",
-get that users points to 15 and our trophy would have the flag image embedded into it. One last obstacle remains though.
+get that users points to 15 and our trophy would have the flag image embedded into it. One final obstacle remains though.
 The user column only allows up to 36 character long usernames. Making that injection as small as possible and taking the
 quotes into account, our end result for the command injection payload is this: `"image Over 0,0 0,0"/prizes/flag.jpg`.
 
-We just need to create a user of that name, get that user to 15 points and the flag should be ours.
+We just need to create a user with that name, attain 15 points and the flag should be ours.
 
 ![Registering a user with the username "image Over 0,0 0,0"/prizes/flag.jp](../../../assets/blog-posts/2024-03-24-openecsc-2024-life-quiz-ctf-writeup/07_register-payload.png)
 
