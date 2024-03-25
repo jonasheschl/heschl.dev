@@ -290,10 +290,10 @@ users points is executed *after* that users `question_id` is incremented. We mig
 race condition by answering each question multiple times at the same time.
 
 When trying that however, we are faced with an issue: PHP sessions have a lock. At the beginning of `quiz.php`,
-`session_start()` is called. This PHP standard library function checks the `PHP_SESSID` cookie for the connecting users
-current session and initializes corresponding session data if present. If another session for that user is currently
-being run, `session_start()` will wait until that session has completed before resuming execution.  If we could bypass
-the session locking and exploit that race condition we could get ourselves 15 points.
+`session_start()` is called. This PHP standard library function checks the `PHPSESSID` cookie for the connecting users
+current session and initializes corresponding session data if present. If another requests with that `PHPSESSID` is
+currently being run, `session_start()` will wait until that session has completed before resuming execution. If only we
+could bypass the session locking and exploit that race condition. Then we could get ourselves 15 points.
 
 It turns out we can! While the session prevents us from running code of the same session at the same time, neither the
 standard library nor the login/registration code prevents us from simply opening multiple sessions for a single user.
