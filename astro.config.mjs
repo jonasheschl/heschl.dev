@@ -13,6 +13,7 @@ export default defineConfig({
       social: {
         github: "https://github.com/jonasheschl",
         mastodon: "https://mastodon.de/@jones",
+        email: "heschl@pm.me",
       },
       sidebar: [
         {
