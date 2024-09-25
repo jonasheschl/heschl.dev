@@ -13,7 +13,7 @@ export default defineConfig({
       social: {
         github: "https://github.com/jonasheschl",
         mastodon: "https://mastodon.de/@jones",
-        email: "heschl@pm.me",
+        //email: "heschl@pm.me",
       },
       sidebar: [
         {
@@ -25,8 +25,16 @@ export default defineConfig({
           autogenerate: { directory: "pwnmemo/web" },
         },
         {
+          label: "Tools",
+          autogenerate: { directory: "pwnmemo/tools" },
+        },
+        {
           label: "Binaries",
           autogenerate: { directory: "pwnmemo/binaries" },
+        },
+        {
+          label: "Misc",
+          autogenerate: { directory: "pwnmemo/misc" },
         },
         {
           label: "CTF Writeups",
