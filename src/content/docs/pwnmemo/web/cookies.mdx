@@ -1,0 +1,21 @@
+---
+title: Cookies
+description: Useful notes and tipps & tricks for cookies and their security considerations.
+---
+
+## Bypass SameSite=Strict with client side redirect
+
+A cookie with `SameSite=Strict` set will not be sent on cross-site requests. Say a cookie with `SameSite=Strict` is set
+on `https://example.com`. The user is currently viewing `https://example2.com`. They now trigger a request to
+`https://example.com` (for example, by clicking a link, form or JavaScript fetch). The cookie will not be sent! This
+can prevent CSRF attacks.
+
+One way of bypassing this security mechanism is to exploit client side redirects. A navigation triggered on the target
+site, to the target site will result in the `SameSite=Strict` cookie being reintroduced to the cookie jar.
+
+```url
+https://example.com?redirect=https://example.com
+```
+
+Doing a `window.open()` with the above URL will result in the `SameSite=Strict` cookie being sent on the second request
+(after the redirect).
