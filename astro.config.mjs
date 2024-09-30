@@ -21,8 +21,8 @@ export default defineConfig({
           autogenerate: { directory: "pwnmemo/welcome" },
         },
         {
-          label: "Web",
-          autogenerate: { directory: "pwnmemo/web" },
+          label: "Targets",
+          autogenerate: { directory: "pwnmemo/targets" },
         },
         {
           label: "Tools",
@@ -35,6 +35,10 @@ export default defineConfig({
         {
           label: "Misc",
           autogenerate: { directory: "pwnmemo/misc" },
+        },
+        {
+          label: "Web",
+          autogenerate: { directory: "pwnmemo/web" },
         },
         {
           label: "CTF Writeups",
