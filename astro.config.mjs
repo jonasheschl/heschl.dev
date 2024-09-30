@@ -41,6 +41,10 @@ export default defineConfig({
           autogenerate: { directory: "pwnmemo/web" },
         },
         {
+          label: "Rev",
+          autogenerate: { directory: "pwnmemo/rev" },
+        },
+        {
           label: "CTF Writeups",
           collapsed: true,
           items: [
