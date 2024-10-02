@@ -18,8 +18,8 @@
     "@astrojs/check": "^0.3.2",
     "@astrojs/starlight": "^0.21.2",
     "@expressive-code/plugin-collapsible-sections": "^0.31.0",
+    "@fontsource/ibm-plex-sans": "^5.1.0",
     "@fontsource/jetbrains-mono": "^5.0.18",
-    "@fontsource/merriweather-sans": "^5.0.8",
     "astro": "^4.0.1",
     "sharp": "^0.32.5",
     "typescript": "^5.3.3"

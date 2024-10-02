@@ -67,8 +67,8 @@ export default defineConfig({
         Header: "./src/components/HeaderOverride.astro",
       },
       customCss: [
-        "@fontsource/merriweather-sans/400.css",
-        "@fontsource/merriweather-sans/600.css",
+        "@fontsource/ibm-plex-sans/400.css",
+        "@fontsource/ibm-plex-sans/600.css",
         "@fontsource/jetbrains-mono/400.css",
         "./src/styles/global.css",
       ],
