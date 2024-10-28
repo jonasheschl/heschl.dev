@@ -11,7 +11,7 @@ character. That way, it is sometimes possible to dynamically solve these binarie
 
 ---
 
-Some password checking and similar binaries (e.g. a binary accepting a value as input and returning weather or not that
+Some password checking and similar binaries (e.g. a binary accepting a value as input and returning whether that
 value is valid) check input validity character by character. When the execution paths for valid and invalid characters
 differ, so will the number of executed instructions. So you can run the binary with all possible inputs for the first
 character and compare the number of instructions run for each. The outlier might be the valid character. Repeat this
@@ -24,7 +24,7 @@ $ qemu-x86_64 -d exec,nochain ./pwd-checker foobar 2>&1 | wc -l
 ```
 
 <Aside type="caution">
-  The same technique works by using `perf` or similar tools. However, this introduces a lot of kernel (scheduling, etc)
-  noise into the measurements. So, when possible, use instruction counting instead.
+  The same technique works by using `perf` or similar tools. However, this introduces a lot of kernel (scheduling, etc.)
+  noise into the measurements. So, when possible, use instruction counting instead!
 </Aside>
 
