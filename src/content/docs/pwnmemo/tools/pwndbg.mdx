@@ -1,0 +1,81 @@
+---
+title: pwndbg
+description: pwndbg is an extension for gdb, making debugging compiled applications a much nicer experience.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+`pwndbg` is an extension for gdb, making debugging compiled applications a much nicer experience.
+
+---
+
+## Format letters
+
+Many `pwndbg`/`gdb` commands support format letters. They indicate how to output (memory) values. When a command
+supports the format letters, they usually have to be provided like so: `COMMAND/LETTER`. For example, `print/t $rax`
+will output the contents of the `rax` register in binary.
+
+The following format letters are supported:
+
++ o (octal)
++ x (hex)
++ d (decimal)
++ u (unsigned decimal),
++ t (binary)
++ f (float)
++ a (address)
++ i (instruction)
++ c (char)
++ s (string)
++ z (hex, zero padded on the left).
+
+## Setting register values
+
+To change the values of registers, use `set` like so.
+
+```
+set $rdx = 0x5
+```
+
+`$rdx` can be replaced by any (sub)-register. For the value, hexadecimal (0x prefix), decimal (no prefix) and binary
+(0b prefix) values are accepted. Prefix the value accordingly.
+
+## Patching instructions at runtime
+
+<Aside type="caution">
+  `patch`'s second argument is currently always interpreted as assembly instructions and converted to machine code.
+  This might change in the future. For now, when you want to patch using manually selected values, use `set` instead of
+  `patch`.
+</Aside>
+
+`pwndbg` supports the `patch` command for patching program instructions at runtime. Simply run
+`patch 0x1234 "instruction arg, arg"` to patch the instructions while running a binary. You can view all your currently
+applied patches by running `patch_list`. To revert patches, run `patch_revert`.
+
+
+## Patching strings at runtime
+
+Unlike with `GEF`, `pwndbg`'s patch command does not support patching anything other than instructions. To patch a
+string at runtime, use `set` instead. The syntax to patch a string looks like this:
+`set *((char[<num chars>]) 0x1234) = "string here"`.
+
+## Examining register values
+
+<Aside type="caution">
+  `x` will always try to dereference a register!
+</Aside>
+
+Use `print` to output a registers value in a variety of formats. As with `x`, you can provide a format to `print`.
+
+```
+p /t $rax
+```
+
+## References
+
+1. [pwndbg official website](https://pwndbg.re)
+2. [pwndbg GitHub repository](https://github.com/pwndbg/pwndbg/)
+3. [pwndbg official cheatsheet](https://pwndbg.re/CheatSheet.pdf)
+4. [The patch command](https://pwndbg.re/pwndbg/commands/patch/patch/)
+5. [The patch_list command](https://pwndbg.re/pwndbg/commands/patch/patch_list/)
+6. [The patch_revert command](https://pwndbg.re/pwndbg/commands/patch/patch_revert/)
