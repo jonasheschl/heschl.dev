@@ -33,7 +33,7 @@ if (!isBlogPost && next?.href.startsWith("/blog/")) {
       <a href={prev.href} rel="prev">
         <Icon name={isRtl ? "right-arrow" : "left-arrow"} size="1.5rem" />
         <span>
-          {labels["page.previousLink"]}
+          {Astro.locals.t("page.previousLink")}
           <br />
           <span class="link-title">{prev.label}</span>
         </span>
@@ -45,7 +45,7 @@ if (!isBlogPost && next?.href.startsWith("/blog/")) {
       <a href={next.href} rel="next">
         <Icon name={isRtl ? "left-arrow" : "right-arrow"} size="1.5rem" />
         <span>
-          {labels["page.nextLink"]}
+          {Astro.locals.t("page.nextLink")}
           <br />
           <span class="link-title">{next.label}</span>
         </span>
