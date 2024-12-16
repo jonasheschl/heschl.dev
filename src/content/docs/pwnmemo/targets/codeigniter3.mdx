@@ -2,6 +2,7 @@
 title: CodeIgniter 3
 description: Details on the PHP web framework "CodeIgniter 3" and its common security issues.
 ---
+
 import FigCaption from "../../../../components/FigCaption.astro";
 
 CodeIgniter 3 is the previous version of the popular PHP web framework. Maintenance of CodeIgniter 3 is slow though
@@ -108,6 +109,7 @@ p {
 ```
 
 ![A browser alert with the text "Localhost says"](../../../../assets/pwnmemo/targets/codeigniter3/codeigniter3-xss-alert.png)
+
 <FigCaption caption="The XSS is triggered by wrapping a JavaScript payload in script tags and passing it to the vulnerable parameter." />
 
 You can find a full PoC project [here](https://github.com/jonasheschl/CodeIgniter3-XSS-PoC).

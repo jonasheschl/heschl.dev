@@ -3,7 +3,7 @@ title: Instruction Counting
 description: How to do instruction counting and how this can be useful for reverse engineering.
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside } from "@astrojs/starlight/components";
 
 Instruction counting can be a useful technique to solve some password checkers and similar binaries. When verification
 operations are run character by character, counting instructions can find the validity of a password character by
@@ -24,7 +24,7 @@ $ qemu-x86_64 -d exec,nochain ./pwd-checker foobar 2>&1 | wc -l
 ```
 
 <Aside type="caution">
-  The same technique works by using `perf` or similar tools. However, this introduces a lot of kernel (scheduling, etc.)
-  noise into the measurements. So, when possible, use instruction counting instead!
+  The same technique works by using `perf` or similar tools. However, this introduces a lot of
+  kernel (scheduling, etc.) noise into the measurements. So, when possible, use instruction counting
+  instead!
 </Aside>
-

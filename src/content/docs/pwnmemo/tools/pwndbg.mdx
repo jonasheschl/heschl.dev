@@ -3,7 +3,7 @@ title: pwndbg
 description: pwndbg is an extension for gdb, making debugging compiled applications a much nicer experience.
 ---
 
-import { Aside } from '@astrojs/starlight/components';
+import { Aside } from "@astrojs/starlight/components";
 
 `pwndbg` is an extension for gdb, making debugging compiled applications a much nicer experience.
 
@@ -17,17 +17,17 @@ will output the contents of the `rax` register in binary.
 
 The following format letters are supported:
 
-+ `o` (octal)
-+ `x` (hex)
-+ `d` (decimal)
-+ `u` (unsigned decimal),
-+ `t` (binary)
-+ `f` (float)
-+ `a` (address)
-+ `i` (instruction)
-+ `c` (char)
-+ `s` (string)
-+ `z` (hex, zero padded on the left).
+- `o` (octal)
+- `x` (hex)
+- `d` (decimal)
+- `u` (unsigned decimal),
+- `t` (binary)
+- `f` (float)
+- `a` (address)
+- `i` (instruction)
+- `c` (char)
+- `s` (string)
+- `z` (hex, zero padded on the left).
 
 ## Setting register values
 
@@ -43,15 +43,14 @@ set $rdx = 0x5
 ## Patching instructions at runtime
 
 <Aside type="caution">
-  `patch`'s second argument is currently always interpreted as assembly instructions and converted to machine code.
-  This might change in the future. For now, when you want to patch using manually selected values, use `set` instead of
-  `patch`.
+  `patch`'s second argument is currently always interpreted as assembly instructions and converted
+  to machine code. This might change in the future. For now, when you want to patch using manually
+  selected values, use `set` instead of `patch`.
 </Aside>
 
 `pwndbg` supports the `patch` command for patching program instructions at runtime. Simply run
 `patch 0x1234 "instruction arg, arg"` to patch the instructions while running a binary. You can view all your currently
 applied patches by running `patch_list`. To revert patches, run `patch_revert`.
-
 
 ## Patching strings at runtime
 
@@ -61,9 +60,7 @@ string at runtime, use `set` instead. The syntax to patch a string looks like th
 
 ## Examining register values
 
-<Aside type="caution">
-  `x` will always try to dereference a register!
-</Aside>
+<Aside type="caution">`x` will always try to dereference a register!</Aside>
 
 Use `print` to output a registers value in a variety of formats. As with `x`, you can provide a format to `print`.
 

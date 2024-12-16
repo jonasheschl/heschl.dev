@@ -25,6 +25,7 @@ us to the live server.
 <FigCaption caption="Life Quiz challenge description." />
 
 ## Getting an overview
+
 Upon reviewing the hosted web application, we gain an understanding of what Life Quiz is about. After registering an
 account and logging in, we are presented with three options:
 
@@ -283,7 +284,7 @@ Summing up, the first obstacle is to get a user with 15 points. After that, we c
 ## Getting 15 points
 
 Let's revisit `quiz.php`! Our chances of guessing correctly 15 times in a row are `0.25 ^ 15 -> 0.000000001`. So
-guessing the questions until we get lucky 15 times in a row is not feasible.  We'll need to find an alternative approach.
+guessing the questions until we get lucky 15 times in a row is not feasible. We'll need to find an alternative approach.
 One thing that strikes us is that none of the SQL statements use transactions. Furthermore, the statement updating a
 users points is executed *after* that users `question_id` is incremented. We might be able to exploit this fact as a
 race condition by answering each question multiple times at the same time.
@@ -486,6 +487,7 @@ Connection: close
 
 answer=%s
 ```
+
 ```python
 sessions = [
     "a84f664fa191229fbe34a0b5f4a5308e",

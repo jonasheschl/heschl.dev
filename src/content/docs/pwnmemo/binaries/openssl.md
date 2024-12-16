@@ -6,7 +6,7 @@ description: A reference on features of the openssl binary, relevant for securit
 ## Code execution/Privilege escalation
 
 The binary `openssl` can be made to load custom libraries via `req -engine /library.so`. This can result in arbitrary
-code  execution. If `openssl` has SUID set, this can also lead to privilege escalation.
+code execution. If `openssl` has SUID set, this can also lead to privilege escalation.
 
 ```bash
 openssl req -engine /path/to/custom/library.so

@@ -1,6 +1,7 @@
 ---
 title: hydra
-description: How to use the password cracking utility hydra. General descriptions on the tool and its switches, as well
+description:
+  How to use the password cracking utility hydra. General descriptions on the tool and its switches, as well
   as witch combinations.
 ---
 
@@ -16,13 +17,13 @@ Hydra is a command line tool used to brute force credentials. Hydra supports a m
 hydra -C /path/to/wordlist 1.2.3.4 -s 1337 -uf http-get /path
 ```
 
-+ `-C`: Singular, combined (`username:password`) wordlist to use.
-+ `1.2.3.4`: Target system.
-+ `-s`: Target port.
-+ `-u`: Iterate through users before passwords. E.g. Try all users on a password before trying the next password.
-+ `-f`: Stop searching for more valid credentials after finding the first valid.
-+ `http-get`: Try the credentials via HTTP basic auth.
-+ `/path`: The path to try the credentials on with HTTP basic auth.
+- `-C`: Singular, combined (`username:password`) wordlist to use.
+- `1.2.3.4`: Target system.
+- `-s`: Target port.
+- `-u`: Iterate through users before passwords. E.g. Try all users on a password before trying the next password.
+- `-f`: Stop searching for more valid credentials after finding the first valid.
+- `http-get`: Try the credentials via HTTP basic auth.
+- `/path`: The path to try the credentials on with HTTP basic auth.
 
 ### Separate username and password list
 
@@ -30,16 +31,15 @@ hydra -C /path/to/wordlist 1.2.3.4 -s 1337 -uf http-get /path
 hydra -L /path/to/usernames -P /path/to/passwords -uf 1.2.3.4 -s 1337 <attack-method>
 ```
 
-+ `-L`: Wordlist to use for usernames.
-+ `-P`: Wordlist to use for passwords.
-+ `-u`: Iterate through users before passwords. E.g. Try all users on a password before trying the next password.
-+ `-f`: Stop searching for more valid credentials after finding the first valid.
-+ `1.2.3.4`: Target system.
-+ `-s`: Target port.
-+ `<attack-method>`: How hydra should try to use the credentials. For instance, HTTP basic auth.
+- `-L`: Wordlist to use for usernames.
+- `-P`: Wordlist to use for passwords.
+- `-u`: Iterate through users before passwords. E.g. Try all users on a password before trying the next password.
+- `-f`: Stop searching for more valid credentials after finding the first valid.
+- `1.2.3.4`: Target system.
+- `-s`: Target port.
+- `<attack-method>`: How hydra should try to use the credentials. For instance, HTTP basic auth.
 
 ### Known/static username or password
-
 
 ```shell
 hydra -P /path/to/passwords -l "known-username" 1.2.3.4 -s 1337 -f <attack-method>
@@ -52,15 +52,15 @@ hydra -p "known-password" -L /path/to/usernames 1.2.3.4 -s 1337 -f <attack-metho
 You can have either `-p` or `-l` lowercase, which makes hydra use it as a known, static credential. Uppercase on the
 other hand will refer to the given wordlist for credentials.
 
-+ `-P`: Wordlist to use for passwords.
-+ `-p`: Known, static password.
-+ `-L`: Wordlist to use for usernames.
-+ `-l`: Known, static username.
-+ `1.2.3.4`: Target system.
-+ `-s`: Target port.
-+ `-f`: Stop searching for more valid credentials after finding the first valid.
-+ `http-get`: Try the credentials via HTTP basic auth.
-+ `/path`: The path to try the credentials on with HTTP basic auth.
+- `-P`: Wordlist to use for passwords.
+- `-p`: Known, static password.
+- `-L`: Wordlist to use for usernames.
+- `-l`: Known, static username.
+- `1.2.3.4`: Target system.
+- `-s`: Target port.
+- `-f`: Stop searching for more valid credentials after finding the first valid.
+- `http-get`: Try the credentials via HTTP basic auth.
+- `/path`: The path to try the credentials on with HTTP basic auth.
 
 ### HTTP POST form encoded data
 
@@ -68,17 +68,17 @@ other hand will refer to the given wordlist for credentials.
 hydra -L /path/to/usernames -P /path/to/passwords 1.2.3.4 -s 1337 -uf http-post-form "/<path>:username=^USER^&password=^PASS^:F=<failure-string>"
 ```
 
-+ `-L`: Wordlist to use for usernames.
-+ `-P`: Wordlist to use for passwords.
-+ `1.2.3.4`: Target system.
-+ `-s`: Target port.
-+ `-u`: Iterate through users before passwords. E.g. Try all users on a password before trying the next password.
-+ `-f`: Stop searching for more valid credentials after finding the first valid.
-+ `http-post-form`: Send a post request with the following form encoded data.
-+ `/path`: The path to try the credentials on with HTTP basic auth.
-+ `^USER^`: Where in the form encoded data to inject the username.
-+ `^PASS^`: Where in the form encoded data to inject the password.
-+ `<failure-string>`: A string which, when present in the response, indicates a login failure.
+- `-L`: Wordlist to use for usernames.
+- `-P`: Wordlist to use for passwords.
+- `1.2.3.4`: Target system.
+- `-s`: Target port.
+- `-u`: Iterate through users before passwords. E.g. Try all users on a password before trying the next password.
+- `-f`: Stop searching for more valid credentials after finding the first valid.
+- `http-post-form`: Send a post request with the following form encoded data.
+- `/path`: The path to try the credentials on with HTTP basic auth.
+- `^USER^`: Where in the form encoded data to inject the username.
+- `^PASS^`: Where in the form encoded data to inject the password.
+- `<failure-string>`: A string which, when present in the response, indicates a login failure.
 
 ### SSH
 
@@ -86,13 +86,13 @@ hydra -L /path/to/usernames -P /path/to/passwords 1.2.3.4 -s 1337 -uf http-post-
 hydra -L /path/to/usernames -P /path/to/passwords -uf ssh://1.2.3.4:1337 -t 4
 ```
 
-+ `-L`: Wordlist to use for usernames.
-+ `-P`: Wordlist to use for passwords.
-+ `-u`: Iterate through users before passwords. E.g. Try all users on a password before trying the next password.
-+ `-f`: Stop searching for more valid credentials after finding the first valid.
-+ `1.2.3.4`: Target system.
-+ `:1337`: Target port.
-+ `-t`: Reduce the number of threads to 4. SSH, by default, blocks more than 4 simultaneous connections.
+- `-L`: Wordlist to use for usernames.
+- `-P`: Wordlist to use for passwords.
+- `-u`: Iterate through users before passwords. E.g. Try all users on a password before trying the next password.
+- `-f`: Stop searching for more valid credentials after finding the first valid.
+- `1.2.3.4`: Target system.
+- `:1337`: Target port.
+- `-t`: Reduce the number of threads to 4. SSH, by default, blocks more than 4 simultaneous connections.
 
 ### FTP
 
@@ -100,11 +100,11 @@ hydra -L /path/to/usernames -P /path/to/passwords -uf ssh://1.2.3.4:1337 -t 4
 hydra -L /path/to/usernames -P /path/to/passwords -uf ftp://1.2.3.4
 ```
 
-+ `-L`: Wordlist to use for usernames.
-+ `-P`: Wordlist to use for passwords.
-+ `-u`: Iterate through users before passwords. E.g. Try all users on a password before trying the next password.
-+ `-f`: Stop searching for more valid credentials after finding the first valid.
-+ `1.2.3.4`: Target system.
+- `-L`: Wordlist to use for usernames.
+- `-P`: Wordlist to use for passwords.
+- `-u`: Iterate through users before passwords. E.g. Try all users on a password before trying the next password.
+- `-f`: Stop searching for more valid credentials after finding the first valid.
+- `1.2.3.4`: Target system.
 
 ## Saving progress
 
