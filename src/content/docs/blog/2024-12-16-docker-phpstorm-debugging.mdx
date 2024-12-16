@@ -1,0 +1,122 @@
+---
+title: Debugging PHP in a Docker container with PhpStorm
+description: This post explains how to debug PHP running in a Docker container with PhpStorm.
+lastUpdated: 2024-12-16
+pagefind: false
+image:
+  src: /src/assets/blog-posts/2024-03-24-openecsc-2024-life-quiz-ctf-writeup/01_quizzing.png
+  alt: A screenshot of the quizzing section of this challenge. "Question 1. What is the meaning of life? 42, There is no meaning, To be happy, To help others."
+tags: ["PHP", "Docker", "PhpStorm"]
+---
+
+import FigCaption from "../../../components/FigCaption.astro";
+import { FileTree } from "@astrojs/starlight/components";
+import { Steps } from '@astrojs/starlight/components';
+
+Getting debugging to work with PHP running inside a Docker container can be a hassle. This post is a step-by-step guide
+on setting up debugging PHP in a Docker container with PHPStorm. This guide works for any PHP framework and library, no
+matter if your project is running vanilla PHP, CodeIgniter or another setup.
+You can find a working example project [here [1]](https://github.com/jonasheschl/todo).
+
+---
+
+To debug your PHP project with PhpStorm, follow these steps:
+
+<Steps>
+1. Create a directory `docker` with the files `error_reporting.ini` and `xdebug.ini`.
+
+   <FileTree>
+    - docker
+      - error_reporting.ini
+      - xdebug.ini
+    - src
+      - [...]
+    - Dockerfile
+    - docker-compose.yaml
+    - [...]
+   </FileTree>
+
+   ```ini title="error_reporting.ini"
+   error_reporting=E_ALL
+   ```
+
+   ```ini title="xdebug.ini"
+   zend_extension=xdebug
+
+   [xdebug]
+   xdebug.mode=develop,debug
+   xdebug.client_host=host.docker.internal
+   xdebug.start_with_request=yes
+   ```
+
+2. Mount the two config files you just created into the Docker container by modifying your `docker-compose.yaml` file.
+
+   Your compose file my look different of course. The important thing is to add the two lines indicated just below.
+
+   ```yaml title="docker-compose.yaml" ins={6-8}
+   services:
+       apache:
+           build: .
+           ports:
+               - "80:80"
+           volumes:
+               - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+               - ./docker/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+   ```
+
+3. Make your host IP address available inside the container via `host.docker.internal` by further modifying your
+  `docker-compose.yaml` file.
+
+    ```yaml title="docker-compose.yaml" ins={9-10}
+    services:
+        apache:
+            build: .
+            ports:
+                - "80:80"
+            volumes:
+                - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+                - ./docker/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+            extra_hosts:
+                host.docker.internal: host-gateway
+    ```
+
+4. Install and enable xdebug in the Docker container by adding the following `RUN` instruction to your `Dockerfile`.
+
+    Your Dockerfile may look different of course. The important thing is just to add
+    `RUN pecl install xdebug && docker-php-ext-enable xdebug`.
+
+    ```js title="Dockerfile" ins={3-4}
+    FROM php:apache
+
+    RUN pecl install xdebug \
+        && docker-php-ext-enable xdebug
+
+    WORKDIR /var/www/html
+
+    COPY src .
+
+    CMD ["apache2-foreground"]
+    ```
+
+5. Make sure PhpStorm debug settings are configured correctly.
+
+6. Configure path mappings between PhpStorm and the Docker container.
+
+7. Create a PhpStorm PHP Remote Debug configuration.
+
+8. Run the PhpStorm PHP Remote Debug configuration and make sure PhpStorm is listening for incoming connection.
+
+9. Install an Xdebug browser addon, configure the IDE key and enable debugging.
+
+   Refer to [this table by JetBrains](https://www.jetbrains.com/help/phpstorm/browser-debugging-extensions.html). For
+   this guide, I will use Firefox and [Xdebug Helper](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/).
+
+10. Set a breakpoint and enjoy your debugging experience!
+</Steps>
+
+## References
+
+1. [Repository containing a working PHP, Docker, PHPStorm debugging setup](https://github.com/jonasheschl/todo)
+2. [Guide by thecodingmachine this post is partially based on](https://thecodingmachine.io/configuring-xdebug-phpstorm-docker)
+3. [Buide by Ekino France this post is partially based on](https://medium.com/ekino-france/xdebug-configuration-phpstorm-docker-desktop-817da3005556.)
+4. [Docker forum thread this post is partially based on](https://forums.docker.com/t/ip-address-for-xdebug/10460/36)
