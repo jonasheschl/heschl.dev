@@ -109,24 +109,55 @@ To debug your PHP project with PhpStorm, follow these steps:
 
 6. Configure path mappings between PhpStorm and the Docker container.
 
-    ![](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-path-mapping.png)
+    Here you have to set the path of you source files as they will be inside the Docker container. The
+    exact configuration will depend on your setup. The below screenshot shows how the path mapping will have to be
+    configured for the [example project](https://github.com/jonasheschl/php-docker-phpstorm-debugging-example).
+
+    ![PhpStorm servers configuration. A path mapping of src to /var/www/html is defined.](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-path-mapping.png)
+
+    <FigCaption caption="The src directory will be mapped to /var/www/html in the Docker container."/>
 
 7. Create a PhpStorm PHP Remote Debug configuration.
 
-    ![](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-debugging-run-configuration.png)
+    Now create a run configuration for debugging PHP. Add a new configuration and choose "PHP Remote Debug" as the
+    type. You won't have to change any settings for the run configuration.
+
+    ![A PHP Remote Debug run configuration with no changes to the default settings.](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-debugging-run-configuration.png)
+
+    <FigCaption caption="The PHP Remote Debug run configuration. No configuration is neccessary."/>
 
 8. Run the PhpStorm PHP Remote Debug configuration, set a breakpoint and make sure PhpStorm is listening for incoming connection.
 
-    ![](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-running-run-configuration.png)
+    Select the run configuration you just created in the drop-down on the top left. Then press debug (the green bug
+    icon).
 
-9. Install an Xdebug browser addon, configure the IDE key and enable debugging.
+    ![A breakpoint is set on a line of PHP code. The run configuration is running.](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-running-run-configuration.png)
 
-   Refer to [this table by JetBrains](https://www.jetbrains.com/help/phpstorm/browser-debugging-extensions.html). For
-   this guide, I will use Firefox and [Xdebug Helper](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/).
+    <FigCaption caption="PhpStorm will break on the selected line."/>
 
-10. Set a breakpoint and enjoy your debugging experience!
+9. Install an Xdebug browser addon, configure the IDE key and enable debugging in the browser.
 
-    ![](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-breakpoint-hit.png)
+   For Xdebug to activate, you have to send a special cookie with your requests. There are many browser extensions
+   automating this process. Refer to [this table by JetBrains](https://www.jetbrains.com/help/phpstorm/browser-debugging-extensions.html).
+   The following screenshot was created using Firefox and [Xdebug helper](https://addons.mozilla.org/de/firefox/addon/xdebug-helper-for-firefox/).
+
+   ![A Firefox tab with Xdebug Helper being activated.](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/firefox-xdebug-helper.png)
+
+   <FigCaption caption="With the browser extension enabled, Xdebug will activate."/>
+
+10. Start the PHP Docker Server.
+
+    Now that everything is set up, you can start your PHP server running in the Docker container. If you use docker
+    compose, simply run `docker compose up --build --force-recreate`. The two additional flags make sure changes are
+    applied.
+
+11. Set a breakpoint and enjoy your debugging experience!
+
+    Finally, set a breakpoint in PhpStorm and load the corresponding page using your configured browser!
+
+    ![PhpStorm breaking on a hit breakpoint.](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-breakpoint-hit.png)
+
+    <FigCaption caption="PhpStorm will now break whenever the lines you set a breakpoint on are executed."/>
 
 </Steps>
 
