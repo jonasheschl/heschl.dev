@@ -51,7 +51,7 @@ To debug your PHP project with PhpStorm, follow these steps:
 
 2. Mount the two config files you just created into the Docker container by modifying your `docker-compose.yaml` file.
 
-   Your compose file my look different of course. The important thing is to add the three lines indicated just below.
+   Your compose file might look different of course. The important thing is to add the three lines indicated just below.
 
    ```yaml title="docker-compose.yaml" ins={6-8}
    services:
@@ -100,11 +100,24 @@ To debug your PHP project with PhpStorm, follow these steps:
 
 5. Make sure PhpStorm debug settings are configured correctly.
 
+    These settings should be correctly configured by default. Just to be sure, check them anyway. You can find them
+    under File → Settings → PHP → Debug. Make especially sure that the Xdebug ports are not changed from 9000 and 9003.
+
+    ![PHPStorm PHP Debugging settings page. The Xdebug ports are configured for port 9000 and 9003.](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-debugging-configuration.png)
+
+    <FigCaption caption="The Xdebug ports should be set to 9000 and 9003 by default."/>
+
 6. Configure path mappings between PhpStorm and the Docker container.
+
+    ![](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-path-mapping.png)
 
 7. Create a PhpStorm PHP Remote Debug configuration.
 
-8. Run the PhpStorm PHP Remote Debug configuration and make sure PhpStorm is listening for incoming connection.
+    ![](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-debugging-run-configuration.png)
+
+8. Run the PhpStorm PHP Remote Debug configuration, set a breakpoint and make sure PhpStorm is listening for incoming connection.
+
+    ![](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-running-run-configuration.png)
 
 9. Install an Xdebug browser addon, configure the IDE key and enable debugging.
 
@@ -112,6 +125,9 @@ To debug your PHP project with PhpStorm, follow these steps:
    this guide, I will use Firefox and [Xdebug Helper](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/).
 
 10. Set a breakpoint and enjoy your debugging experience!
+
+    ![](../../../assets/blog-posts/2024-12-16-docker-phpstorm-debugging/phpstorm-breakpoint-hit.png)
+
 </Steps>
 
 ## References
