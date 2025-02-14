@@ -1,0 +1,171 @@
+---
+title: ffuf
+description:
+  ffuf is a fast web fuzzer. It can be used to enumerate subdomains, webserver directories, credentials and more.
+---
+
+ffuf is a fast web fuzzer. It can be used to enumerate subdomains, webserver directories, credentials and more.
+
+---
+
+## Simple usage
+
+### Fuzzing for webserver directories
+
+```shell
+ffuf -w /path/to/wordlist.txt -u https://example.com/FUZZ -ic -c
+```
+
+- `-w`: Wordlist to use for fuzzing. Should be a raw text file. Newline separated.
+- `-u`: URL of the target system. By default, the string `FUZZ` will be replaced by the entries of the wordlist.
+- `-ic`: Ignore comments. Some wordlists have lines indicating when, why and by whom the list was created. This switch
+makes sure those lines are ignored.
+- `-c`: Enables outputs with color.
+
+### Filtering responses by response size
+
+```shell
+ffuf -w /path/to/wordlist.txt -u https://example.com/FUZZ -ic -c -fs 1337,1000-1020
+```
+
+- `-w`: Wordlist to use for fuzzing. Should be a raw text file. Newline separated.
+- `-u`: URL of the target system. By default, the string `FUZZ` will be replaced by the entries of the wordlist.
+- `-ic`: Ignore comments. Some wordlists have lines indicating when, why and by whom the list was created. This switch
+makes sure those lines are ignored.
+- `-c`: Enables outputs with color.
+- `-fs`: Discards any responses that match the given size, range, or comma separated list of sizes and ranges.
+
+### Filtering responses by regex
+
+```shell
+ffuf -w /path/to/wordlist.txt -u https://example.com/FUZZ -ic -c -fr "foobar"
+```
+
+- `-w`: Wordlist to use for fuzzing. Should be a raw text file. Newline separated.
+- `-u`: URL of the target system. By default, the string `FUZZ` will be replaced by the entries of the wordlist.
+- `-ic`: Ignore comments. Some wordlists have lines indicating when, why and by whom the list was created. This switch
+makes sure those lines are ignored.
+- `-c`: Enables outputs with color.
+- `-fs`: Discards any responses that match the given regex. Specifically, checks if the given expression has any
+occurrence in the response.
+
+### Fuzzing for subdomains
+
+```shell
+ffuf -w /path/to/wordlist.txt -u https://FUZZ.example.com -ic -c
+```
+
+- `-w`: Wordlist to use for fuzzing. Should be a raw text file. Newline separated.
+- `-u`: URL of the target system. By default, the string `FUZZ` will be replaced by the entries of the wordlist.
+- `-ic`: Ignore comments. Some wordlists have lines indicating when, why and by whom the list was created. This switch
+makes sure those lines are ignored.
+- `-c`: Enables outputs with color.
+
+### Fuzzing with cookies
+
+```shell
+ffuf -w /path/to/wordlist.txt -u https://example.com/FUZZ -b "cookie1=foo; cookie2=bar" -ic -c
+```
+
+- `-w`: Wordlist to use for fuzzing. Should be a raw text file. Newline separated.
+- `-u`: URL of the target system. By default, the string `FUZZ` will be replaced by the entries of the wordlist.
+- `-b`: Specify a cookie or a list of cookies. If multiple cookies, they should be delimited by a semicolon. The given
+cookie(s) will be sent with every request.
+- `-ic`: Ignore comments. Some wordlists have lines indicating when, why and by whom the list was created. This switch
+makes sure those lines are ignored.
+- `-c`: Enables outputs with color.
+
+### Fuzzing POST requests
+
+```shell
+ffuf -w /path/to/wordlist.txt -u https://example.com/FUZZ -X POST -ic -c
+```
+
+- `-w`: Wordlist to use for fuzzing. Should be a raw text file. Newline separated.
+- `-u`: URL of the target system. By default, the string `FUZZ` will be replaced by the entries of the wordlist.
+- `-X`: Specify the HTTP request method to use. By default, ffuf uses `GET`.
+- `-ic`: Ignore comments. Some wordlists have lines indicating when, why and by whom the list was created. This switch
+makes sure those lines are ignored.
+- `-c`: Enables outputs with color.
+
+### Fuzzing POST request bodies
+
+```shell
+ffuf -w /path/to/wordlist.txt -u https://example.com -X POST -H "Content-Type: application/x-www-form-urlencoded" -d "foo=FUZZ&bar=baz" -ic -c
+```
+
+- `-w`: Wordlist to use for fuzzing. Should be a raw text file. Newline separated.
+- `-u`: URL of the target system. By default, the string `FUZZ` will be replaced by the entries of the wordlist.
+- `-X`: Specify the HTTP request method to use. By default, ffuf uses `GET`.
+- `-H`: Set an HTTP request header. In this case, the content-type is set to `application/x-www-form-urlencoded`.
+- `-d`: The request body to send with every request. Wordlist substitutions **are** supported!
+- `-ic`: Ignore comments. Some wordlists have lines indicating when, why and by whom the list was created. This switch
+makes sure those lines are ignored.
+- `-c`: Enables outputs with color.
+
+### Fuzzing vhosts
+
+```shell
+ffuf -w /path/to/wordlist.txt -u https://example.com -H "Host: FUZZ.example.com" -ic -c
+```
+
+- `-w`: Wordlist to use for fuzzing. Should be a raw text file. Newline separated.
+- `-u`: URL of the target system. By default, the string `FUZZ` will be replaced by the entries of the wordlist.
+- `-H`: This switch allows specifying HTTP headers. Wordlist substitutions **are** supported within headers! By
+specifying the host header and substituting within it, vhosts can be enumerated with ffuf.
+- `-ic`: Ignore comments. Some wordlists have lines indicating when, why and by whom the list was created. This switch
+makes sure those lines are ignored.
+- `-c`: Enables outputs with color.
+
+### Fuzzing with multiple wordlists
+
+```shell
+ffuf -w /path/to/wordlist1.txt:FOO -w /path/to/wordlist2.txt:BAR -mode clusterbomb -u https://example.com/FOO/BAR -ic -c
+```
+
+- `-w`: Wordlist to use for fuzzing. Should be a raw text file. Newline separated. The text after the `:` indicates the
+key this wordlist will replace. By default, the key is `FUZZ`. Then the key is manually specified, multiple wordlists
+can be used.
+- `-mode`: This switch specifies how ffuf behaves when multiple wordlists are used. ffuf supports `clusterbomb` (default),
+`pitchfork` and `sniper`. Refer to [here](https://github.com/ffuf/ffuf/wiki#multiple-wordlists).
+- `-u`: URL of the target system. By default, the string `FUZZ` will be replaced by the entries of the wordlist.
+- `-ic`: Ignore comments. Some wordlists have lines indicating when, why and by whom the list was created. This switch
+makes sure those lines are ignored.
+- `-c`: Enables outputs with color.
+
+### Sending results to Burp using replay-proxy
+
+ffuf has a little known feature which allows sending the results of a fuzz to Burp (or any http proxy). This is useful
+for detailed traffic inspection, filtering and to have view the entirety of an applications behaviour within burp.
+
+```shell
+ffuf -w /path/to/wordlist.txt -u https://example.com/FUZZ -ic -c -replay-proxy http://localhost:8080
+```
+
+- `-w`: Wordlist to use for fuzzing. Should be a raw text file. Newline separated.
+- `-u`: URL of the target system. By default, the string `FUZZ` will be replaced by the entries of the wordlist.
+- `-ic`: Ignore comments. Some wordlists have lines indicating when, why and by whom the list was created. This switch
+makes sure those lines are ignored.
+- `-c`: Enables outputs with color.
+- `-replay-proxy`: If this switch is set, ffuf will resend all successful requests (as specified by filters) to the
+given location. By default, Burp starts a proxy on [http://localhost:8080]().
+
+### Fuzzing for files with known extensions
+
+```shell
+ffuf -w /path/to/wordlist.txt -u https://example.com/FUZZ -e .php,.html,.foo -ic -c
+```
+
+- `-w`: Wordlist to use for fuzzing. Should be a raw text file. Newline separated.
+- `-u`: URL of the target system. By default, the string `FUZZ` will be replaced by the entries of the wordlist.
+- `-e`: Must be a comma separated list of extensions. ffuf will send additional requests with the extension appended.
+Note that long extension lists can have a great impact on fuzzing time. This switch effectively multiplies the wordlist
+length by the number of extensions given.
+- `-ic`: Ignore comments. Some wordlists have lines indicating when, why and by whom the list was created. This switch
+makes sure those lines are ignored.
+- `-c`: Enables outputs with color.
+
+## References
+
+1. [ffuf GitHub repository](https://github.com/ffuf/ffuf)
+2. [Official ffuf wiki](https://github.com/ffuf/ffuf/wiki)
