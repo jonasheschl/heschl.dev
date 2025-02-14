@@ -49,6 +49,11 @@ export default defineConfig({
           collapsed: true,
           items: [
             {
+              label: "Spell/MVM Checkers CTF Author Writeup",
+              link: "/blog/2025-02-14-spell-mvm-checkers-ctf-writeup",
+              attrs: { target: "_blank", style: "font-style: italic" },
+            },
+            {
               label: "Google CTF 2023 — Under-Construction",
               link: "/blog/2023-06-26-google-ctf-2023-under-construction-writeup",
               attrs: { target: "_blank", style: "font-style: italic" },
