@@ -1,0 +1,32 @@
+---
+title: JavaScript
+description: This site contains weird, un(der)documented and security-relevant behaviour of JavaScript in general and
+  various standard library functions.
+---
+
+This site contains weird, un(der)documented and security-relevant behaviour of JavaScript in general and various standard
+library functions.
+
+## RegExp.prototype.test()
+
+> The `test()` method of `RegExp` instances executes a search with this regular expression for a match between a regular
+expression and a specified string. Returns `true` if there is a match; `false` otherwise.
+
+– From [mdn](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test).
+
+When passed a non-string value, the given value will first be transformed to a string by its
+[type-specific `ToString()` abstract operation](https://tc39.es/ecma262/multipage/abstract-operations.html#sec-tostring).
+Take this sample code for instance.
+
+```js
+/foo/.test(["foo", "bar", "baz"]);
+```
+
+The given array `["foo", "bar", "baz"]` will be transformed to a string like `"foo,bar,baz"`.
+Thus, the above code is equivalent to `/foo/.test("foo,bar,baz");`. The `test()` call will thus return true. This works
+for any type with a `ToString()` abstract operation.
+
+See [mdn](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test)
+and [the spec](https://tc39.es/ecma262/multipage/text-processing.html#sec-regexp.prototype.test).
+
+
