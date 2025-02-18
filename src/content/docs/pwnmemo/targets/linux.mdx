@@ -1,0 +1,10 @@
+---
+title: Linux
+description: Security related details and tricks on Linux
+---
+
+## /proc/X/root symlink
+
+Every process subdirectory of `/proc` contains a file `root` pointing to the filesystem root. For instance
+`/proc/1/root` will point to `/`. This also works with `/proc/self/root`. This symlink can be used to bypass filters
+and blacklists for LFI. A path to read `/etc/hosts` might look like this: `/proc/self/root/etc/hosts`.
