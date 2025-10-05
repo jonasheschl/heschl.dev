@@ -25,6 +25,10 @@ export default defineConfig({
           autogenerate: { directory: "pwnmemo/targets" },
         },
         {
+          label: "Languages",
+          autogenerate: { directory: "pwnmemo/langs" },
+        },
+        {
           label: "Tools",
           autogenerate: { directory: "pwnmemo/tools" },
         },
