@@ -1,0 +1,48 @@
+---
+title: PHP
+description: This site contains weird, un(der)documented and security-relevant behaviour of PHP in general and
+  various standard library functions.
+---
+
+This site contains weird, un(der)documented and security-relevant behaviour of PHP in general and various standard
+library functions.
+
+## preg_match bypass via too long input
+
+PHP's `preg_match` from the PHP standard library can be bypassed, in some cases, by passing certain, long inputs which
+cause the PHP regex engine to error out. The function is usually called with two arguments. A regex pattern to
+match and a subject which will be matched with the regex pattern. Usually `preg_match` will return 1 if the given
+subject matches the given pattern, or 0 if it doesn't. However, when providing a subject that makes the regex engine
+error out, `preg_match` will return a falsy value (not `False` itself). Thus, if `preg_match` is used to pass user
+input through black lists and code does not strictly check for the return value of `preg_match` such black list checks
+can be bypassed. One simple way of making the regex engine error out is by providing a subject which will match the
+set pattern often. Around 8.000 matches, the regex engine will error.
+
+Take this code for example.
+
+```php
+$blacklist_regex = "/(union|select|from)+/is";
+
+function is_evil_input($input)
+{
+    if(preg_match($pattern, $input)) {
+        throw new Exception("Possible SQL injection detected. Aborting.");
+    } else {
+        return false;
+    }
+}
+```
+
+By providing an input like `"from"*8000`, that is the string "from" repeated 8.000 times, `preg_match` will return a falsy
+value, even though the input would match the set regex pattern.
+
+Expressed in code this means the following.
+
+```php
+preg_match("/(union|select|from)+/is", str_repeat("from", 5000)); // returns int(1)
+preg_match("/(union|select|from)+/is", str_repeat("from", 8000)); // returns bool(false)
+```
+
+## References
+
+1. [Official PHP documentation on preg_match](https://www.php.net/manual/en/function.preg-match.php)
