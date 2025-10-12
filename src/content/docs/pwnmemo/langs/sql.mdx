@@ -1,0 +1,15 @@
+---
+title: SQL
+description: This site contains weird, un(der)documented and security-relevant behaviour of SQL in its various flavors.
+---
+
+## SQL without spaces
+
+One simple way to run arbitrary SQL without spaces is to use tabs (`\t`) instead. If that is not possible, most DMSes
+still allow arbitrary SQL by using a combination of braces (`()`) and identifier separators/backticks (``` ` ```).
+
+Tabs, newlines or braces
+
+## SQL queries/injections without knowing column names
+
+Make a subquery and select the columns from there with `as`.
